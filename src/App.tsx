@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Dashboard from "./layout/pages/dashboard/Dashboard";
+import Layout from "./layout/Layout";
+import FrontRoutes from "./routes/FrontRoutes";
 
 function App() {
   return (
     <div className="App">
-     <Dashboard/>
+        <Layout>
+            <FrontRoutes/>
+        </Layout>
     </div>
   );
 }
