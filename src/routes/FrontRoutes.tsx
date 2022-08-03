@@ -18,7 +18,7 @@ const FrontRoutes = (props: Props) => {
       <Routes>
           {!user
               ? <Route path={"/login"} element={<Login/>}/>
-              : <Route path={"/dashboard"} element={<Navigate replace to={"/"}/>}/>
+              : <Route path={"/login"} element={<Navigate replace to={"/"}/>}/>
           }
 
           {!user && <Route path="/register" element={<Register/>}/>}

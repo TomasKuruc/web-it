@@ -11,8 +11,9 @@ import {File, selectFiles} from "store/files/files";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router";
-import {setFileDetail} from "store/files/file";
+import {setFileDetail, setFileDetailData} from "store/files/file";
 import {transformData} from "utils/transformData";
+import {sortData} from "utils/sortData";
 
 interface Props {}
 
@@ -23,8 +24,7 @@ const FilesList = (props: Props) => {
 
     const openFileDetail = (file: File) => {
         dispatch(setFileDetail(file));
-
-        transformData(file.data);
+        dispatch(setFileDetailData(sortData(file)))
 
         navigate("/fileDetail");
     }
@@ -61,7 +61,7 @@ const FilesList = (props: Props) => {
                                 </Button>
                             </TableCell>
                         </TableRow>
-                    ))}
+                    )).reverse()}
                 </TableBody>
             </Table>
         </TableContainer>

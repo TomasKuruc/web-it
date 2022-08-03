@@ -10,9 +10,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Link} from "react-router-dom";
 import {registerUser} from "helpers/firebase/registerUser";
+import {useNavigate} from "react-router";
 
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -27,6 +30,8 @@ const RegisterForm = () => {
             email: data.get('email') as string,
             password: data.get('password') as string
         });
+
+        navigate('/');
     }
 
         return (
@@ -83,16 +88,6 @@ const RegisterForm = () => {
                             fullWidth
                             name="password"
                             label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password_confirmed"
-                            label="Confirm password"
                             type="password"
                             id="password"
                             autoComplete="current-password"

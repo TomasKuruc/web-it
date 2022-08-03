@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,10 +11,12 @@ import Container from '@mui/material/Container';
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import {login} from "helpers/firebase/login";
+import {useNavigate} from "react-router";
 
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -30,6 +30,8 @@ const Login = () => {
             email: data.get('email') as string,
             password: data.get('password') as string
         }, dispatch);
+
+        navigate('/');
     };
 
     return (

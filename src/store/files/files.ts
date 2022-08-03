@@ -8,11 +8,15 @@ export interface FileData {
 }
 
 export interface File {
-    id: number | null
-    uid: string | null
-    name?: string | null
-    created_at?: string | null
-    data: FileData[]
+    id: string | null,
+    uid: string | null,
+    name?: string | null,
+    created_at?: string | null,
+    pattern: string,
+    data: FileData[],
+    price: number,
+    total_hours: number,
+    total_price: number
 }
 
 
@@ -43,6 +47,10 @@ export const filesSlice = createSlice({
             state.saved.push(action.payload);
         },
 
+        setSavedFiles: (state, action) => {
+            state.saved = action.payload
+        },
+
         addFileToUnsaved: (state, action) => {
             if (state.saved.find(file => file.id === action.payload.id)) {
                 return;
@@ -53,12 +61,16 @@ export const filesSlice = createSlice({
 
         removeFileFromUnsaved: (state, action) => {
             state.unsaved = state.unsaved.filter(file => file.id !== action.payload);
+        },
+
+        clearFiles: (state) => {
+            Object.assign(state, initialState)
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { saveFile, addFileToUnsaved, removeFileFromUnsaved } = filesSlice.actions;
+export const { saveFile, setSavedFiles, addFileToUnsaved, removeFileFromUnsaved, clearFiles } = filesSlice.actions;
 export const selectFiles = (state: RootState) => state.files;
 
 export default filesSlice.reducer

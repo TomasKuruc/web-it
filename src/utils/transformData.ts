@@ -2,7 +2,8 @@ import {FileData} from "store/files/files";
 
 export interface TransformDataReturnType {
     headers: string[],
-    nonEditableColumn: string[]
+    nonEditableColumn: string[],
+    hours: any[]
 }
 
 export const transformData = (data: FileData[]): TransformDataReturnType => {
@@ -12,6 +13,13 @@ export const transformData = (data: FileData[]): TransformDataReturnType => {
             .filter((value, index: number) => index === 0)[0]
     )
 
-    console.log('headers: ',headers, 'nonEditable: ', nonEditableColumn);
-    return {headers: headers, nonEditableColumn: nonEditableColumn}
+    const hours: number[] = [];
+
+    data.map((row: FileData) => {
+        Object.values(row.item).filter((item: any) => !isNaN(parseInt(item))).map((num: any) => {
+            hours.push(parseInt(num));
+        })
+    })
+
+    return {headers: headers, nonEditableColumn: nonEditableColumn, hours: hours}
 }
